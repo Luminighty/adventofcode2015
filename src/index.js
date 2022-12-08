@@ -1,6 +1,6 @@
 import { Advent } from "./advent";
 
-const { title, solve_a, solve_b } = Advent.Day3;
+const { title, solve_a, solve_b } = Advent.Day4;
 
 console.log(`~~~~~ ${title} ~~~~~`);
 solve_a();
