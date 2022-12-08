@@ -5,7 +5,7 @@ export const title = "Day 1: Not Quite Lisp";
 export function solve_a() {
 	const input = read_input("inp/01.txt");
 	const chars = [...input];
-	console.log( chars.filter((c) => c == '(').length - chars.filter((c) => c == ')').length  )
+	console.log( chars.filter((c) => c == '(').length - chars.filter((c) => c == ')').length );
 }
 
 export function solve_b() {
