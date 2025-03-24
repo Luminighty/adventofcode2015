@@ -1,47 +1,48 @@
-import { read_input } from "../utils";
+import { read_input } from "../utils.js";
 
-export const title = "Day 3: Perfectly Spherical Houses in a Vacuum";
+export const title = "Day 3: Squares With Three Sides";
 
-const Dir = {
-	">": [1, 0],
-	"^": [0, -1],
-	"v": [0, 1],
-	"<": [-1, 0],
-};
-
-/** @returns {[number, number][]} */
 export function get_input() {
-	const input = read_input("inp/03.txt");
-	return [...input].map((char) => Dir[char]);
+	return read_input("inp/03.txt").split("\n")
+		.map((line) => line.trim().split(" ").filter(Boolean).map((num) => parseInt(num)));
+}
+
+function isValidTriangle(a, b, c) {
+	if (a >= b + c)
+		return false
+	if (b >= a + c)
+		return false
+	if (c >= b + a)
+		return false
+	return true
 }
 
 export function solve_a() {
 	const input = get_input();
-	
-	const pos = {};
-	const current = {x: 0, y: 0};
-	pos["0,0"] = 1;
-	for (const [x, y] of input) {
-		current.x += x;
-		current.y += y;
-		pos[`${current.x},${current.y}`] = 1;
+
+	let c = 0
+	for (const triangle of input) {
+		if (triangle.length !== 3)
+			console.log(triangle);
+			
+		if (isValidTriangle(...triangle))
+			c++
 	}
-	console.log(Object.keys(pos).length);
+	console.log(c);
 }
 
 export function solve_b() {
 	const input = get_input();
-	
-	const pos = {};
-	const current = [{x: 0, y: 0}, {x: 0, y: 0}];
-	let turn = 0;
-	pos["0,0"] = 1;
-	for (const [x, y] of input) {
-		let c = current[turn % 2];
-		c.x += x;
-		c.y += y;
-		pos[`${c.x},${c.y}`] = 1;
-		turn++;
+
+	let count = 0
+	for (let i = 0; i < input.length; i += 3) {
+		let a = input[i]	
+		let b = input[i + 1]
+		let c = input[i + 2]
+		for (let j = 0; j < 3; j++) {
+			if (isValidTriangle(a[j], b[j], c[j]))
+				count++
+		}
 	}
-	console.log(Object.keys(pos).length);
+	console.log(count);
 }

@@ -1,4 +1,4 @@
-import { read_input } from "../utils";
+import { read_input } from "../utils.js";
 
 export const title = "";
 

@@ -1,82 +1,53 @@
-import { read_input } from "../utils";
+import md5 from "md5";
+import { read_input } from "../utils.js";
 
-export const title = "Day 5: Doesn't He Have Intern-Elves For This?";
+export const title = "Day 5: How About a Nice Game of Chess?";
 
-
-/** @returns {string[]} */
 export function get_input() {
-	return read_input("inp/05.txt").split("\n");
+	return "uqwqemis"
 }
 
-function has_double(str) {
-	for (let i = 1; i < str.length; i++) {
-		if (str[i-1] == str[i])
-			return true;
-	}
-	return false;
-}
-
-function min_vowels(str) {
-	const min = 3;
-	const vowel = [..."aeiou"];
-	let count = 0;
-	for (const c of str) {
-		if (vowel.includes(c)) {
-			count++;
-		}
-		if (count >= min) {
-			return true;
-		}
-	}
-	return false;
-}
-
-function no_naughty(str) {
-	const naughty = ["ab", "cd", "pq", "xy"];
-	return naughty.every((n) => !str.includes(n));
-}
-
+const USE_CACHE = true
 export function solve_a() {
-	const input = get_input();
+	if (USE_CACHE)
+		return console.log({password: "1a3099aa"})
 
-	let c = 0;
-	for (const str of input) {
-		if (no_naughty(str) && min_vowels(str) && has_double(str)) {
-			c++;
+	let id = get_input();
+	let num = 0
+	let password = ""
+	while (password.length < 8) {
+		const hash = md5(`${id}${num}`)
+		if (hash.slice(0, 5) == "00000") {
+			password += hash.slice(5, 6)
+			console.log(`Found new part: ${password}`);
 		}
+		num++
 	}
-	console.log(c);
-}
-
-
-function pair_letters(str) {
-	for (let i = 1; i < str.length; i++) {
-		const pair = `${str[i-1]}${str[i]}`;
-		for (let j = i+2; j < str.length; j++) {
-			const other = `${str[j-1]}${str[j]}`;
-			if (pair == other)
-				return true;
-		}
-	}
-	return false;
-}
-
-function repeat(str) {
-	for (let i = 2; i < str.length; i++) {
-		if (str[i-2] == str[i])
-			return true;
-	}
-	return false;
+	console.log({password})
 }
 
 export function solve_b() {
-	const input = get_input();
+	if (USE_CACHE)
+		return console.log({password: "694190cd"})
+	let id = get_input();
 
-	let c = 0;
-	for (const str of input) {
-		if (pair_letters(str) && repeat(str)) {
-			c++;
-		}
+	let piecesFound = 0
+	let num = 0
+	let password = Array(8).fill("_")
+	const validPositions = ['0', '1', '2', '3', '4', '5', '6', '7']
+	while (piecesFound < 8) {
+		num++
+		const hash = md5(`${id}${num}`)
+		if (hash.slice(0, 5) != "00000")
+			continue
+		const p = hash.charAt(5)
+		const c = hash.charAt(6)
+		if (!validPositions.includes(p))
+			continue
+		validPositions.splice(validPositions.findIndex((c) => c == p), 1)
+		piecesFound++
+		password[parseInt(p)] = c
+		console.log(`Found new part: ${password.join('')}`);
 	}
-	console.log(c);
+	console.log({password: password.join('')})
 }

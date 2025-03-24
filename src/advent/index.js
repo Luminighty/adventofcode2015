@@ -1,10 +1,25 @@
-import * as Day1 from "./p01";
-import * as Day2 from "./p02";
-import * as Day3 from "./p03";
-import * as Day4 from "./p04";
-import * as Day5 from "./p05";
-import * as Day6 from "./p06";
-
-export const Advent = {
-	Day1, Day2, Day3, Day4, Day5, Day6
-};
+export * as Day1 from "./p01/index.js";
+export * as Day2 from "./p02/index.js";
+export * as Day3 from "./p03/index.js";
+export * as Day4 from "./p04/index.js";
+export * as Day5 from "./p05/index.js";
+export * as Day6 from "./p06/index.js";
+export * as Day7 from "./p07/index.js";
+export * as Day8 from "./p08/index.js";
+export * as Day9 from "./p09/index.js";
+export * as Day10 from "./p10/index.js";
+export * as Day11 from "./p11/index.js";
+// export * as Day12 from "./p12/index.js";
+// export * as Day13 from "./p13/index.js";
+// export * as Day14 from "./p14/index.js";
+// export * as Day15 from "./p15/index.js";
+// export * as Day16 from "./p16/index.js";
+// export * as Day17 from "./p17/index.js";
+// export * as Day18 from "./p18/index.js";
+// export * as Day19 from "./p19/index.js";
+// export * as Day20 from "./p20/index.js";
+// export * as Day21 from "./p21/index.js";
+// export * as Day22 from "./p22/index.js";
+// export * as Day23 from "./p23/index.js";
+// export * as Day24 from "./p24/index.js";
+// export * as Day25 from "./p25/index.js";
